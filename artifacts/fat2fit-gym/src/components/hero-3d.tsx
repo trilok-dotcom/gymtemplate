@@ -2,9 +2,23 @@ import { useRef, useMemo, useState, useEffect, Suspense, lazy } from 'react';
 
 const ThreeCanvas = lazy(() => import('./hero-3d-canvas'));
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
 function CssParticles() {
+  const isMobile = useIsMobile();
+  const count = isMobile ? 20 : 60;
+
   const particles = useMemo(() => {
-    return Array.from({ length: 60 }, (_, i) => ({
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -13,7 +27,7 @@ function CssParticles() {
       delay: Math.random() * 6,
       opacity: Math.random() * 0.5 + 0.15,
     }));
-  }, []);
+  }, [count]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -28,6 +42,9 @@ function CssParticles() {
           to { transform: rotate(360deg); }
         }
         .animate-spin-slow { animation: spin-slow linear infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-spin-slow, [style*="float-particle"] { animation: none !important; }
+        }
       `}</style>
       {particles.map((p) => (
         <div
@@ -50,9 +67,7 @@ function CssParticles() {
 function CssOrbs() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div
-        className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[440px] h-[440px] hidden md:block"
-      >
+      <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[440px] h-[440px] hidden md:block">
         <div className="absolute inset-0 rounded-full border border-amber-400/20 animate-spin-slow" style={{ animationDuration: '20s' }} />
         <div className="absolute inset-[12%] rounded-full border border-amber-400/15 animate-spin-slow" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
         <div className="absolute inset-[24%] rounded-full border border-orange-500/20 animate-spin-slow" style={{ animationDuration: '10s' }} />
@@ -61,13 +76,16 @@ function CssOrbs() {
           <div className="w-40 h-40 rounded-full bg-gradient-to-br from-amber-400/15 to-orange-600/10 blur-2xl animate-pulse" style={{ animationDuration: '3s' }} />
         </div>
       </div>
-      <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-amber-400/5 blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-orange-600/5 blur-2xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+      {/* Simpler mobile glow — no heavy blur or multiple animations */}
+      <div className="block md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-amber-400/8 blur-3xl" />
+      <div className="hidden md:block absolute top-20 left-10 w-64 h-64 rounded-full bg-amber-400/5 blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="hidden md:block absolute bottom-20 right-20 w-48 h-48 rounded-full bg-orange-600/5 blur-2xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
     </div>
   );
 }
 
 export function Hero3D() {
+  const isMobile = useIsMobile();
   const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -86,7 +104,8 @@ export function Hero3D() {
       <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
       <CssParticles />
       <CssOrbs />
-      {webglSupported && (
+      {/* Only load heavy 3D canvas on desktop with WebGL */}
+      {!isMobile && webglSupported && (
         <Suspense fallback={null}>
           <ThreeCanvas />
         </Suspense>
