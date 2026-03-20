@@ -1,0 +1,23 @@
+[build]
+  # Build only the fat2fit-gym frontend
+  command = "pnpm --filter @workspace/fat2fit-gym build"
+  # Path to the build output
+  publish = "artifacts/fat2fit-gym/dist/public"
+
+[build.environment]
+  # Optional: Let Netlify know we are using node 20+
+  NODE_VERSION = "20"
+
+# Redirect API calls to your hosted backend
+[[redirects]]
+  from = "/api/*"
+  # TODO: Replace this URL with your actual hosted backend URL (e.g. Render, Railway)
+  to = "https://your-backend-url-goes-here.com/api/:splat"
+  status = 200
+  force = true
+
+# Handle React Router (SPA Fallback)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
