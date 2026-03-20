@@ -1,0 +1,176 @@
+Create a high-end futuristic 3D fitness website for a gym brand called "Fat 2 Fit Gym".
+
+The design should feel premium, cinematic, and immersive like a luxury fitness brand. Use dark theme with neon accents (black, charcoal, electric yellow/orange highlights).
+
+Core Experience:
+
+Smooth scroll storytelling website
+
+3D animated hero section with rotating dumbbells, barbells, or muscular silhouette
+
+Parallax effects and motion-based transitions
+
+Glassmorphism UI cards
+
+Subtle particle effects (floating dust/sweat vibe)
+
+Sections:
+1. Hero Section
+
+Full-screen 3D animation (gym equipment rotating slowly)
+
+Heading:
+"Transform Your Body. Elevate Your Life."
+
+Subtext:
+"Train with experts. Build strength. Become unstoppable."
+
+CTA Buttons:
+
+Join Now
+
+Book Free Trial
+
+2. About Section (Scroll Animation)
+
+Animated entry (fade + slide)
+
+Content:
+
+Premium fitness environment
+
+Certified trainers
+
+Community-driven gym
+
+Include stats:
+
+4.8★ rating
+
+150+ reviews
+
+1000+ members trained
+
+3. Trainers Section (IMPORTANT)
+
+3D hover cards for trainers
+
+Highlight:
+
+Sunil (Strength & Rehab Specialist)
+
+Satish (Weight Training Expert)
+
+Tushar (General Fitness)
+
+Add:
+
+Experience
+
+Specialty
+
+Short tagline
+
+4. Services Section (3D Cards)
+
+Strength Training
+
+Personal Training
+
+Weight Loss Programs
+
+Muscle Building
+
+Rehab Training
+
+Each card:
+
+Hover animation
+
+Icon or 3D model
+
+5. Gym Experience Section
+
+Horizontal scroll gallery
+
+Show:
+
+Equipment
+
+Space
+
+Environment
+
+Add subtle zoom-in animation
+
+6. Testimonials Section (Auto Slider)
+
+Use real-style content:
+
+"Very friendly trainers and great environment"
+
+"Affordable and well equipped gym"
+
+"Trainer Sunil is highly knowledgeable"
+
+Add star rating visuals
+
+7. Pricing Section
+
+Clean cards:
+
+Daily Pass
+
+Weekly Plan
+
+Monthly Membership
+
+Highlight affordability
+
+8. Contact Section
+
+Location: Benaulim / South Goa
+
+Phone number
+
+WhatsApp button
+
+Google Maps embed
+
+CTA: "Start Your Transformation Today"
+
+Animations:
+
+Smooth scrolling
+
+Scroll-triggered reveals
+
+Hover glow effects
+
+Micro-interactions on buttons
+
+Page transitions with fade + blur
+
+Tech Stack:
+
+React + Three.js (for 3D)
+
+Tailwind CSS
+
+Framer Motion animations
+
+Mobile Optimization:
+
+Fully responsive
+
+Simplified 3D on mobile (lighter animations)
+
+Fast loading
+
+Extra Features:
+
+Sticky navbar with blur effect
+
+Dark mode aesthetic only
+
+Loading animation (fitness-themed)

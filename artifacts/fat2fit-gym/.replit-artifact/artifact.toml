@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Fat 2 Fit Gym"
+version = "1.0.0"
+id = "artifacts/fat2fit-gym"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18849
+
+[services.development]
+run = "pnpm --filter @workspace/fat2fit-gym run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fat2fit-gym", "run", "build" ]
+publicDir = "artifacts/fat2fit-gym/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18849"
+BASE_PATH = "/"
